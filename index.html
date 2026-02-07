@@ -2,25 +2,65 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>はじめてのWebページ</title>
+    <title>魔法のお城</title>
     <style>
-        /* CSS: 見た目を整える */
-        body { font-family: sans-serif; text-align: center; background-color: #f0f0f0; }
-        h1 { color: #2c3e50; }
-        button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #e0f2f7;
+            margin: 0;
+            overflow: hidden; /* 画像がはみ出さないように */
+        }
+        .castle-container {
+            position: relative;
+            width: 500px; /* お城の幅 */
+            height: 500px; /* お城の高さ */
+            background-image: url('https://user-images.githubusercontent.com/97858643/218000494-0d93708a-2d64-4e4b-91f6-a320d2a8497d.png'); /* 扉が閉まっているお城 */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: pointer; /* マウスオーバーでカーソルが変わる */
+        }
+        .door-man {
+            position: absolute;
+            bottom: 100px; /* 扉から少し浮かせた位置 */
+            left: 50%;
+            transform: translateX(-50%) translateY(100%); /* 初期は扉の下に隠す */
+            width: 100px; /* 人の幅 */
+            height: 150px; /* 人の高さ */
+            background-image: url('https://user-images.githubusercontent.com/97858643/218000490-9f2683b5-41e9-4674-8b6b-4e4a0d9b43e5.png'); /* 出てくる人 */
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0; /* 最初は透明 */
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* スムーズな動き */
+        }
+        .door-man.show {
+            transform: translateX(-50%) translateY(0); /* 扉の上に移動 */
+            opacity: 1; /* 不透明に */
+        }
     </style>
 </head>
 <body>
 
-    <h1>こんにちは！</h1>
-    <p>ボタンを押すと挨拶が変わります。</p>
-    <button onclick="sayHello()">クリックしてね</button>
+    <div class="castle-container" id="castle">
+        <div class="door-man" id="doorMan"></div>
+    </div>
 
     <script>
-        // JavaScript: 動きを作る
-        function sayHello() {
-            alert("Hello World! 魔法がかかりましたよ！");
-        }
+        const castle = document.getElementById('castle');
+        const doorMan = document.getElementById('doorMan');
+
+        castle.addEventListener('click', () => {
+            // 扉をクリックしたら人が出てくる
+            doorMan.classList.add('show');
+
+            // 3秒後に人がまた隠れる
+            setTimeout(() => {
+                doorMan.classList.remove('show');
+            }, 3000);
+        });
     </script>
 
 </body>
