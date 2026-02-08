@@ -72,20 +72,20 @@
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
         }
 
-        /* --- クリック後の変化 --- */
+        /* --- クリック後 --- */
         .stage.open .door { transform: scale(1.5); opacity: 0; }
         .stage.open .girl { opacity: 1; transform: translateX(-50%) translateY(20px) scale(1.6); }
         .stage.open .welcome-text.show { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
 
-        /* ★男の子が右に移動する設定 */
+        /* ★男の子が右に移動 */
         .stage.open .boy {
-            right: 20%; /* 右側に移動 */
-            transform: scale(1.6); /* 少し大きくして寄ってきた感を出す */
+            left: 20%; 
+            transform: scale(1.6); /*
         }
         
         /* ★メッセージも男の子と一緒に右へ移動 */
         .stage.open .boy-msg {
-            right: 20%;
+            left: 20%;
             bottom: 35%;
         }
 
@@ -116,7 +116,7 @@
                 boyText.innerText = "ようこそお越しくださいました！";
                 setTimeout(() => { msg.classList.add('show'); }, 600);
             } else {
-                // 戻る時は元のセリフに
+                // 戻る時は元のセリフにする
                 boyText.innerText = "扉をたたいてね！";
                 msg.classList.remove('show');
             }
